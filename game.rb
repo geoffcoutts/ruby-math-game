@@ -1,6 +1,7 @@
 require 'byebug'
 require './player.rb'
 require './turn_manager.rb'
+require './question.rb'
 
 class Game
 
@@ -22,14 +23,24 @@ class Game
       current_player = @turn.current_player
       puts "It's your turn #{current_player.name}"
 
-      puts current_player.lives
-      current_player.lose_life
-      puts current_player.lives
+      @q = Question.new
+      puts "Your question is: #{@q.question} ?"
+      puts @q.answer
 
-      if current_player.lose_game?
-        # byebug
-        @turn.remove_current_player
+      user_answer = gets.chomp.to_i
+
+      if @q.compare_answer?(user_answer)
+        @turn.next_turn
+      else
+        puts current_player.lives
+        current_player.lose_life
+        puts current_player.lives
+
+        if current_player.lose_game?
+          @turn.remove_current_player
+        end
       end
+
       @turn.next_turn
     end
 
