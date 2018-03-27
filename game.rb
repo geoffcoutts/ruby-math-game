@@ -19,9 +19,11 @@ class Game
   end
 
   def run
+    puts "\n\nLET'S PLAY!\n\n"
+
     until game_over?
       current_player = @turn.current_player
-      puts "It's your turn #{current_player.name}"
+      puts "It's your turn, #{current_player.name}. You have #{current_player.lives} lives."
 
       @q = Question.new
       puts "Your question is: #{@q.question} ?"
@@ -30,23 +32,23 @@ class Game
       user_answer = gets.chomp.to_i
 
       if @q.compare_answer?(user_answer)
-        puts "Correct!"
+        puts "\nCorrect!\n\n"
         @turn.next_turn
       else
         current_player.lose_life
-        puts "Wrong! You lose 1 life."
-        puts "You now have #{current_player.lives}."
+        puts "\nWrong! You lose 1 life."
+        puts "You now have #{current_player.lives}.\n\n"
 
-
-        @turn.next_turn
         if current_player.lose_game?
+          puts "You lose!"
           @turn.remove_current_player
+        else
+          @turn.next_turn
         end
       end
 
     end
-
-    puts "Congratulations #{current_player.name}! You win!"
+    puts "Congratulations, #{turn.players[0].name}! You win!"
     # puts @turn.current_player.name
   end
 end

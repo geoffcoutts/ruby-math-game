@@ -17,7 +17,7 @@ CLASSES --> Player, Game, TurnManager
   Question
     attr_accessor :question :answer
 
-    initialize: one float, one int
+    initialize: two int
 
     Generates question
     Passes it to Game
