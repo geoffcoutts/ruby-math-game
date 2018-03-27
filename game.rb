@@ -7,9 +7,9 @@ class Game
 
   attr_accessor :players, :turn
 
-  def initialize
-    p1 = Player.new('Player 1')
-    p2 = Player.new('Player 2')
+  def initialize(player1, player2, lives)
+    p1 = Player.new(player1, lives)
+    p2 = Player.new(player2, lives)
 
     @turn = TurnManager.new([p1, p2])
   end
