@@ -30,18 +30,20 @@ class Game
       user_answer = gets.chomp.to_i
 
       if @q.compare_answer?(user_answer)
+        puts "Correct!"
         @turn.next_turn
       else
-        puts current_player.lives
         current_player.lose_life
-        puts current_player.lives
+        puts "Wrong! You lose 1 life."
+        puts "You now have #{current_player.lives}."
 
+
+        @turn.next_turn
         if current_player.lose_game?
           @turn.remove_current_player
         end
       end
 
-      @turn.next_turn
     end
 
     puts "Congratulations #{current_player.name}! You win!"
